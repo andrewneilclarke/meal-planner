@@ -60,6 +60,7 @@ const CreateMeal: React.FC<Props> = ({ mealName, setMealName, ingredient1, ingre
 
     return (
         <>
+
             <form onSubmit={(e: React.FormEvent) => console.log(e)}>
                 <input type="text" name="title" id="title" value={mealName} placeholder="Meal Name" onChange={(e) => setMealName(e.target.value)} />
                 <input type="text" name="ing1" id="ing1" value={ingredient1} placeholder="Ingredient 1" onChange={(e) => setIngredient1(e.target.value)} />
@@ -67,7 +68,7 @@ const CreateMeal: React.FC<Props> = ({ mealName, setMealName, ingredient1, ingre
                 <Button buttonText="Create" buttonType="button" onSubmit={onSubmit} />
                 {/* <button className="bg-black text-white p-2" type="submit">Create</button> */}
             </form >
-            <MyMeals meals={meals} setMeals={setMeals} />
+            <MyMeals meals={meals} setMeals={setMeals} mealName={mealName} ingredient1={ingredient1} ingredient2={ingredient2} setMealName={setMealName} setIngredient1={setIngredient1} setIngredient2={setIngredient2} addMeal={addMeal} />
             {/* <InputField inputname={inputname} id={id} placeholder={placeholder} type={type} /> */}
 
         </>

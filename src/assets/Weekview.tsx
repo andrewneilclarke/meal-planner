@@ -8,8 +8,8 @@ import {
     LocationMarkerIcon,
 } from '@heroicons/react/solid'
 import { Menu, Transition } from '@headlessui/react'
-
-export { }
+import { Meal } from '../utils/Types'
+import MyMeals from './MyMeals'
 
 const meals = [
     {
@@ -73,7 +73,19 @@ function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+interface Props {
+    mealName: string,
+    setMealName: React.Dispatch<React.SetStateAction<string>>
+    ingredient1: string,
+    ingredient2: string,
+    setIngredient1: React.Dispatch<React.SetStateAction<string>>,
+    setIngredient2: React.Dispatch<React.SetStateAction<string>>,
+    addMeal: (newMeal: Meal) => void,
+    meals: Meal[],
+    setMeals: React.Dispatch<React.SetStateAction<Meal[]>>
+}
+
+const Weekview: React.FC<Props> = ({ mealName, setMealName, ingredient1, ingredient2, setIngredient1, setIngredient2, addMeal, meals, setMeals }) => {
     return (
         <div>
             <h2 className="text-lg font-semibold text-gray-900">Upcoming meals</h2>
@@ -144,12 +156,15 @@ export default function Example() {
                         Add Meal
                     </button>
                 </div>
+
+                <MyMeals meals={meals} setMeals={setMeals} mealName={mealName} ingredient1={ingredient1} ingredient2={ingredient2} setMealName={setMealName} setIngredient1={setIngredient1} setIngredient2={setIngredient2} addMeal={addMeal} />
+
                 <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
                     {meals.map((meal) => (
                         <li key={meal.id} className="relative flex space-x-6 py-6 xl:static">
-                            <img src={meal.imageUrl} alt="" className="h-14 w-14 flex-none rounded-full" />
+                            <img src={meal.mealName} alt="" className="h-14 w-14 flex-none rounded-full" />
                             <div className="flex-auto">
-                                <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0">{meal.name}</h3>
+                                <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0">{meal.mealName}</h3>
                                 <dl className="mt-2 flex flex-col text-gray-500 xl:flex-row">
                                     <div className="flex items-start space-x-3">
                                         <dt className="mt-0.5">
@@ -157,8 +172,8 @@ export default function Example() {
                                             <CalendarIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                                         </dt>
                                         <dd>
-                                            <time dateTime={meal.datetime}>
-                                                {meal.date} at {meal.time}
+                                            <time dateTime={meal.mealName}>
+                                                {meal.mealName} at {meal.mealName}
                                             </time>
                                         </dd>
                                     </div>
@@ -167,7 +182,7 @@ export default function Example() {
                                             <span className="sr-only">Location</span>
                                             <LocationMarkerIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                                         </dt>
-                                        <dd>{meal.location}</dd>
+                                        <dd>{meal.mealName}</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -227,3 +242,4 @@ export default function Example() {
         </div>
     )
 }
+export default Weekview;

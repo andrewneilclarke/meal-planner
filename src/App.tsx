@@ -15,7 +15,23 @@ const App: React.FC = () => {
   const [mealName, setMealName] = useState('')
   const [ingredient1, setIngredient1] = useState('')
   const [ingredient2, setIngredient2] = useState('')
-  const [meals, setMeals] = useState<Meal[]>([])
+  const [meals, setMeals] = useState<Meal[]>([
+    {
+      mealName: 'spag bol',
+      ingredient1: 'spaghetti',
+      ingredient2: 'beef mince',
+      id: 4
+    },
+    {
+      mealName: 'chicken and rice',
+      ingredient1: 'chicken breast',
+      ingredient2: 'mushrooms',
+      id: 5
+      // ingredients?: Ingredient[] | Ingredient,
+    },
+
+
+  ])
   // const [meal, setMeal] = useState<Meal>({
   //   name: '',
   // })
@@ -37,9 +53,9 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />}>
 
           </Route>
-          <Route path="/mymeals" element={<MyMeals meals={meals} setMeals={setMeals} />}>
+          <Route path="/mymeals" element={<MyMeals meals={meals} setMeals={setMeals} mealName={mealName} ingredient1={ingredient1} ingredient2={ingredient2} setMealName={setMealName} setIngredient1={setIngredient1} setIngredient2={setIngredient2} addMeal={addMeal} />}>
           </Route>
-          <Route path="/weekview" element={<Weekview />}>
+          <Route path="/weekview" element={<Weekview meals={meals} setMeals={setMeals} mealName={mealName} ingredient1={ingredient1} ingredient2={ingredient2} setMealName={setMealName} setIngredient1={setIngredient1} setIngredient2={setIngredient2} addMeal={addMeal} />}>
           </Route>
 
         </Routes>

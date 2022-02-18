@@ -4,7 +4,7 @@ export type Ingredient = {
 }
 
 export interface Meal {
-    mealName: string,
+    mealName: string | undefined,
     ingredient1: string,
     ingredient2: string,
     id: number

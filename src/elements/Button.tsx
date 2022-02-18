@@ -3,7 +3,7 @@ import React from 'react'
 interface Props {
     buttonText: string,
     buttonType: "button" | "submit" | "reset" | undefined,
-    onSubmit: (e: any) => void
+    onSubmit?: (e: any) => void
 }
 
 const Button: React.FC<Props> = ({ buttonText, buttonType, onSubmit }) => {
