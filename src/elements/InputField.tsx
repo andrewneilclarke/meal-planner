@@ -1,0 +1,31 @@
+import React from 'react'
+import { Meal } from '../utils/Types'
+
+interface Props {
+    inputname?: string,
+    id: string,
+    placeholder?: string,
+    type: string,
+    value: string | undefined,
+    onChange: React.ChangeEventHandler<HTMLInputElement>
+}
+
+export const InputField: React.FC<Props> = ({ inputname, id, placeholder, type, value, onChange }) => {
+    return (
+        <div>
+            <label htmlFor="email" className="sr-only">
+                Email
+            </label>
+            <input
+                type={type}
+                name={inputname}
+                id={id}
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-2/3 sm:text-sm border-gray-300 rounded-md"
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+            />
+        </div>
+
+    )
+}

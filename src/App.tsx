@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
+// import { data } from './data';
+import { Header } from './components/Header'
+import Weekview from './assets/Weekview'
+import MyMeals from './assets/MyMeals';
+import CreateMeal from './assets/CreateMeal';
+import {
+  BrowserRouter as Router,
+  Route, Routes
+} from "react-router-dom";
+import { Meal } from './utils/Types';
 
-function App() {
+const App: React.FC = () => {
+  const [mealName, setMealName] = useState('')
+  const [ingredient1, setIngredient1] = useState('')
+  const [ingredient2, setIngredient2] = useState('')
+  const [meals, setMeals] = useState<Meal[]>([])
+  // const [meal, setMeal] = useState<Meal>({
+  //   name: '',
+  // })
+
+  const addMeal = (newMeal: Meal): void => {
+    setMeals([...meals, newMeal])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <div>
+        {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+        <Routes>
+          <Route path="/createmeal" element={<CreateMeal mealName={mealName} ingredient1={ingredient1} ingredient2={ingredient2} setMealName={setMealName} setIngredient1={setIngredient1} setIngredient2={setIngredient2} addMeal={addMeal} meals={meals} setMeals={setMeals} />}>
+
+          </Route>
+          <Route path="/about" element={<About />}>
+
+          </Route>
+          <Route path="/mymeals" element={<MyMeals meals={meals} setMeals={setMeals} />}>
+          </Route>
+          <Route path="/weekview" element={<Weekview />}>
+          </Route>
+
+        </Routes>
+      </div>
+    </Router >
   );
 }
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
+
 
 export default App;
